@@ -243,7 +243,7 @@ QString VeryLongInteger::toString() const
         }
     }
 
-    return result;
+    return result.isEmpty() ? "0" : result;
 }
 
 bool VeryLongInteger::isNegative() const
