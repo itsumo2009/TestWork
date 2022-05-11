@@ -17,6 +17,12 @@ add_executable(TestWork
   main.cpp
   verylonginteger.cpp
   verylonginteger.h
+  int64filereader.cpp
+  int64filereader.h
+  int64queue.cpp
+  int64queue.h
+  int64worker.cpp
+  int64worker.h
 )
 target_link_libraries(TestWork Qt5::Core)
 

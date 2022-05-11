@@ -75,7 +75,7 @@ bool VeryLongInteger::operator <(const VeryLongInteger &right) const
         if (digit(i) == right.digit(i))
             continue;
         else
-            return digit(i) < right.digit(i);
+            return _negative ? digit(i) > right.digit(i) : digit(i) < right.digit(i);
     return false;
 }
 
@@ -209,6 +209,7 @@ VeryLongInteger &VeryLongInteger::operator -=(const VeryLongInteger &right)
                 }
             break;
             case -1:
+                _negative = !_negative;
                 for (int i =0; i < qMax(_digits.size(), right._digits.size()); ++i)
                 {
                     if (right.digit(i) < digit(i) + acc)
@@ -233,9 +234,12 @@ QString VeryLongInteger::toString() const
     QString result;
     if (_negative)
         result += '-';
-    for (int i=_digits.size() - 1; i>=0; --i)
+    int start = _digits.size() - 1;
+    while (start > 0 && _digits[start] == 0)
+        --start;
+    for (int i=start; i>=0; --i)
     {
-        if (i == _digits.size() - 1)
+        if (i == start)
             result += QString::number(_digits[i]);
         else
         {
